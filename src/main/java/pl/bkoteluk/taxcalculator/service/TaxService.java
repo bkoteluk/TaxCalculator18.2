@@ -1,4 +1,4 @@
-package pl.bkoteluk.service;
+package pl.bkoteluk.taxcalculator.service;
 
 public class TaxService {
     public static int REVENUE_THRESHOLD = 85_528;
@@ -17,7 +17,7 @@ public class TaxService {
     }
 
     private double underTaxThreshold(double number) {
-        return (number*TAX_UNDER_THRESHOLD)/100 - TAX_FREE_AMOUNT;
+        return number <= TAX_FREE_AMOUNT ? 0 : (number*TAX_UNDER_THRESHOLD)/100 - TAX_FREE_AMOUNT;
     }
 
     private double overTaxThreshold(double number) {

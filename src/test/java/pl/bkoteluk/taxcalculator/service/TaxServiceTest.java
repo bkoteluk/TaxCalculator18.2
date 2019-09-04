@@ -1,6 +1,5 @@
-package pl.bkoteluk.service;
+package pl.bkoteluk.taxcalculator.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +7,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaxServiceTest {
-    TaxService tax;
+    TaxService taxService;
 
     @BeforeEach
     void setUp() {
-        tax = new TaxService();
+        taxService = new TaxService();
+    }
+    @Test
+    void whenRevenueIsTen_shouldReturnTaxZero() {
+        long revenue = 10L;
+        long expectedResult = 0L;
+
+        assertEquals(expectedResult, taxService.calculateTax(revenue));
     }
 
     @Test
@@ -20,20 +26,19 @@ class TaxServiceTest {
         long revenue = 10_000L;
         long expectedResult = 1_244L;
 
-        Assertions.assertEquals(expectedResult, tax.calculateTax(revenue));
+        assertEquals(expectedResult, taxService.calculateTax(revenue));
     }
 
     @Test
     void whenRevenueIsEqualRevenueThreshold_shouldReturnTax14_839() {
         long expectedResult = 14_839L;
-        assertThat(expectedResult).isEqualTo(tax.calculateTax(tax.REVENUE_THRESHOLD));
+        assertThat(expectedResult).isEqualTo(taxService.calculateTax(taxService.REVENUE_THRESHOLD));
     }
 
     @Test
     void whenRevenueIsOverRevenueThreshold90_000_shouldReturnTax17_870() {
         long revenue = 95_001L;
         long expectedResult = 17_870L;
-//        assertThat(expectedResult).isEqualTo(tax.calculateTax(revenue));
-        Assertions.assertEquals(expectedResult, tax.calculateTax(revenue));
+        assertEquals(expectedResult, taxService.calculateTax(revenue));
     }
 }

@@ -1,6 +1,6 @@
-package pl.bkoteluk;
+package pl.bkoteluk.taxcalculator;
 
-import pl.bkoteluk.service.TaxService;
+import pl.bkoteluk.taxcalculator.service.TaxService;
 
 public class Application {
     public static void main(String[] args) {
